@@ -24,7 +24,7 @@ function main(export) {
   var properties = getProperties(sheet)
   
   // Get all the data from the sheet, however many rows that may be
-  // [ [ (empty), 'My Project' ,'Fun!', 'https://test.me' ,'Hello', 'some extra' ,'Test Category 1' ], ..., ... ]
+  // [ [ (empty), 'My Project' ,'Fun!', 'https://test.me' ,'Hello', 'some extra' ,'Test Category 1', (empty?) ], ..., ... ]
   var records = getRecords(sheet);
   
   const collectionName = 'publiclessons' // TODO - enter your collection name here
@@ -121,7 +121,7 @@ function exportToFirestore(firestore, collectionName, properties, records, sheet
       // Create the document in Firestore and then store the ID in the sheet
       var createdRecord = firestore.createDocument(collectionName, data);
       
-      // The name is the full path. The ID is at the end 'projects/junior-techbots/databases/(default)/documents/publiclessonstest/33ZAD2XNK98JC3HQ4hIl'
+      // The name is the full path. The ID is at the end 'projects/<project-id>/databases/(default)/documents/<collection-name>/33ZAD2XNK98JC3HQ4hIl'
       const splitPath = createdRecord.name.split('/');
       if (splitPath.length > 0) {
         sheet.setCurrentCell(sheet.getRange('A' + sheetRowIndex)).setValue(splitPath[splitPath.length - 1]);
