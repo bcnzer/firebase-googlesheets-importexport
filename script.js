@@ -14,7 +14,7 @@ function menuImport() {
   main(false)
 }
 
-function main(export) {
+function main(exportData) {
   // Get the active spreadsheet and it's name for the collection name
   var sheet = SpreadsheetApp.getActiveSheet();
   var sheetName = sheet.getName();
@@ -36,7 +36,7 @@ function main(export) {
   
   var firestore = FirestoreApp.getFirestore(email, key, projectId)  
    
-  if (export) {
+  if (exportData) {
     exportToFirestore(firestore, collectionName, properties, records, sheet);
   } else {
     importFromFirestore(firestore, collectionName, properties, records, sheet);
